@@ -7,7 +7,7 @@ namespace De_rest
     enum accountState { Geldig, Geblokkeerd }
     class Account
     {
-        private accountState state;
+        private accountState state = accountState.Geldig;
         private string rekeningnr = "niet vrijgegeven";
 
         public string Rekeningnr
@@ -44,52 +44,80 @@ namespace De_rest
             set { bedrag = value; }
         }
 
+        //METHODEN
         public int WithdrawFunds()
         {
-            Console.WriteLine("How much would you like to withdraw?");
-            //Console.WriteLine("Hoeveel geld wilt u afhalen?");
-            Console.WriteLine($"Huidige balans: {bedrag} ({Naam})");
-            int wd = Convert.ToInt32(Console.ReadLine());
-
-            bedrag -= wd;
-
-            if (wd > bedrag)
+            if (state == accountState.Geblokkeerd)
             {
-                bedrag -= bedrag;
-                Console.WriteLine("Your funds were too low for this withdrawal, we gave you what we could");
+                Console.WriteLine($"ERROR: This account ({Naam}) has been blocked, you can't withdraw any money from this account!");
+                Console.WriteLine("\n");
                 return bedrag;
-                
             }
             else
             {
-                Console.WriteLine($"Er werd {wd} euro van uw rekening gehaald.");
-                return bedrag;
-            }
-            Console.WriteLine("\n");
+                Console.WriteLine("How much would you like to withdraw?");
+                //Console.WriteLine("Hoeveel geld wilt u afhalen?");
+                Console.WriteLine($"Huidige balans: {bedrag} ({Naam})");
+                int wd = Convert.ToInt32(Console.ReadLine());
 
+                bedrag -= wd;
+
+                if (wd > bedrag)
+                {
+                    bedrag -= bedrag;
+                    Console.WriteLine("Your funds were too low for this withdrawal, we gave you what we could");
+                    Console.WriteLine("\n");
+                    return bedrag;
+
+                }
+                else
+                {
+                    Console.WriteLine($"Er werd {wd} euro van uw rekening gehaald.");
+                    Console.WriteLine("\n");
+                    return bedrag;
+                }
+            }
         }
 
         public void PayInFunds(int donatie)
         {
-            bedrag += donatie;
-            Console.WriteLine($"Er is {donatie} euro op rekening van {Naam} gestort,");
-            Console.WriteLine($"u hebt nu {bedrag} euro op uw rekening staan.");
-            Console.WriteLine("\n");
+            if (state == accountState.Geblokkeerd)
+            {
+                Console.WriteLine($"ERROR: This account ({Naam}) has been blocked, you can't deposit any money in this account!");
+                Console.WriteLine("\n");
+            }
+
+            else
+            {
+                bedrag += donatie;
+                Console.WriteLine($"Er is {donatie} euro op rekening van {Naam} gestort,");
+                Console.WriteLine($"U hebt nu {bedrag} euro op uw rekening staan.");
+                Console.WriteLine("\n");
+            }
         }
 
         public void GetBalance()
         {
-            Console.WriteLine($"Bankrekeningnummer: {Rekeningnr}");
-            Console.WriteLine($"Huidig bedrag op rekening van {Naam}:");
-            Console.WriteLine(bedrag);
-            Console.WriteLine("\n");
+            if (state == accountState.Geblokkeerd)
+            {
+                Console.WriteLine($"ERROR: This account ({Naam}) has been blocked, you can't see your balance anymore!");
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine($"Bankrekeningnummer: {Rekeningnr}");
+                Console.WriteLine($"Huidig bedrag op rekening van {Naam}:");
+                Console.WriteLine(bedrag);
+                Console.WriteLine("\n");
+            }
         }
 
         public void ChangeState(accountState status)
         {
             if (status == accountState.Geblokkeerd)
             {
-                Console.WriteLine("ERROR: This account has been blocked");
+                state = accountState.Geblokkeerd;
+                Console.WriteLine($"This account, owned by {Naam}, has been blocked now");
             }
 
         }

@@ -99,13 +99,17 @@ namespace De_rest
             rekening1.GetBalance();
             rekening2.GetBalance();
 
+            rekening1.ChangeState(accountState.Geblokkeerd);
+
             rekening1.PayInFunds(400);
             rekening2.PayInFunds(300);
+            
+            rekening1.ChangeState(accountState.Geblokkeerd);
 
             rekening1.WithdrawFunds();
             rekening2.WithdrawFunds();
 
-            rekening1.ChangeState(accountState.Geblokkeerd);
+            
 
 
 
