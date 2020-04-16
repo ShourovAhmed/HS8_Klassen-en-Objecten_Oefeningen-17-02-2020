@@ -28,10 +28,10 @@ namespace De_rest
 
             Console.WriteLine("Cijferrapport:");
             Console.WriteLine("***********");
-            Console.WriteLine($"Communicatie:\t{PuntenCommunicatie}");
+            Console.WriteLine($"Communicatie:\t\t{PuntenCommunicatie}");
             Console.WriteLine($"Programming Principles:\t{PuntenProgrammingPrinciples}");
-            Console.WriteLine($"Web Technology:\t{PuntenWebTech}");
-            Console.WriteLine($"Gemiddelde:\t{BerekenTotaalCijfer():F1}");
+            Console.WriteLine($"Web Technology:\t\t{PuntenWebTech}");
+            Console.WriteLine($"Gemiddelde:\t\t{BerekenTotaalCijfer():F1}");
         }
 
 

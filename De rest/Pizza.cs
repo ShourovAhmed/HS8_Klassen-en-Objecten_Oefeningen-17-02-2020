@@ -55,6 +55,7 @@ namespace De_rest
 
         public void ToonPizza()
         {
+
             if (Diameter > 0 && Price > 0 && Toppings != "")
             {
                 Console.WriteLine("Pizza");
@@ -63,6 +64,7 @@ namespace De_rest
                 Console.WriteLine($"Toppings: {Toppings}");
                 Console.WriteLine($"Prijs: {Price} euro");
                 Console.WriteLine("\n");
+                
 
             }
 

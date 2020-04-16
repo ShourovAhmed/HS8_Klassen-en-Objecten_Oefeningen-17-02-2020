@@ -57,7 +57,7 @@ namespace De_rest
             {
                 Console.WriteLine("How much would you like to withdraw?");
                 //Console.WriteLine("Hoeveel geld wilt u afhalen?");
-                Console.WriteLine($"Huidige balans: {bedrag} ({Naam})");
+                Console.WriteLine($"Current balance: {bedrag} ({Naam})");
                 int wd = Convert.ToInt32(Console.ReadLine());
 
                 bedrag -= wd;
